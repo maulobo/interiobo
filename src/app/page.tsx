@@ -31,7 +31,7 @@ function FormContent() {
 export default function Home() {
   const [state, formAction] = useFormState(handleSubmit, null);
 
-  async function handleSubmit(_state: Prediction, formData: FormData) {
+  async function handleSubmit(_state: Prediction | null, formData: FormData) {
     let prediction = await createPrediction(formData);
 
     while (["starting", "processing"].includes(prediction.status)) {
