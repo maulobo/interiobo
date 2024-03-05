@@ -12,8 +12,7 @@ export default function Home() {
   }, []);
 
   return (
-   <div className="container mx-auto p-5 ">
-    
+    <div className="container mx-auto p-5 ">
       <div className="flex flex-col items-center justify-center min-h-screen ">
         <h1 className="text-5xl t1 font-bold  mb-10 opacity-0 -translate-x-72 ">
           Welcome!
