@@ -1,59 +1,22 @@
-"use client";
-import { createPrediction, getPrediction } from "@/actions";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useFormState, useFormStatus } from "react-dom";
-import { Prediction } from "@/Types";
-import { Skeleton } from "@/components/ui/skeleton";
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-function FormContent() {
-  const { pending } = useFormStatus();
-  return (
-    <>
-      {pending ? <Skeleton className="h-[480px] w-[512px]" /> : null}
-      <Input
-        defaultValue="https://replicate.delivery/pbxt/IJZOELWrncBcjdE1s5Ko8ou35ZOxjNxDqMf0BhoRUAtv76u4/room.png"
-        placeholder="https://replicate.delivery/pbxt/IJZOELWrncBcjdE1s5Ko8ou35ZOxjNxDqMf0BhoRUAtv76u4/room.png "
-        name="image"
-        type="file"
-      />
-      <Textarea placeholder="An industrial bedroom" name="prompt" />
-
-      <Button disabled={pending}>
-        {pending ? "Banca un toque..." : "Crear"}
-      </Button>
-    </>
-  );
-}
+import Link from "next/link";
 
 export default function Home() {
-  const [state, formAction] = useFormState(handleSubmit, null);
-
-  async function handleSubmit(_state: Prediction | null, formData: FormData) {
-    let prediction = await createPrediction(formData);
-
-    while (["starting", "processing"].includes(prediction.status)) {
-      prediction = await getPrediction(prediction.id);
-
-      await sleep(4000);
-    }
-    return prediction;
-  }
-
   return (
-    <>
-      <section className="m-auto grid gap-4 max-w-[512px]">
-        {state?.output ? (
-          <img alt="previsualizacion" src={state.output[1]} />
-        ) : (
-          ""
-        )}
-        <form action={formAction} className=" grid gap-4">
-          <FormContent />
-        </form>
-      </section>{" "}
-    </>
+    <div className="">
+      <div className="container mx-auto p-5">
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <h1 className="text-5xl font-bold  mb-10">Welcome!</h1>
+          <p className="text-2xl  mb-10">
+            Here you can start creating amazing things.
+          </p>
+          <Link
+            href="/create"
+            className="font-bold py-2 px-4 rounded-full shadow-lg hover:bg-slate-600 hover:text-white transition duration-500 "
+          >
+            Start
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

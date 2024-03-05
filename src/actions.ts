@@ -41,10 +41,9 @@ export async function createPrediction(
         prompt: formData.get("prompt") as string,
         a_prompt:
           "best quality, extremely detailed, 4k, octane render, sharp, bloom, daylight ",
-        n_prompt:
-          "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, blurry",
+        n_prompt: formData.get("n_prompt") as string,
         ddim_steps: 20,
-        num_samples: "1",
+        num_samples: formData.get("num_samples") as string,
         value_threshold: 0.1,
         image_resolution: "512",
         detect_resolution: 512,
