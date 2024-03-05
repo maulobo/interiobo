@@ -54,7 +54,7 @@ export default function Create() {
   }
 
   return (
-    <div className=" h-screen flex  ">
+    <div className=" h-screen flex flex-col  ">
       <form
         action={noToken ? "" : formAction}
         className="flex gap-4 rounded-lg shadow-md p-4"
